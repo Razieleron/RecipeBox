@@ -19,7 +19,6 @@ namespace RecipeBox.Controllers
     public ActionResult Index()
     {
         return View(_db.Recipes.ToList());
-
     }
 
     public ActionResult Create()
@@ -34,14 +33,14 @@ namespace RecipeBox.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
-  public ActionResult Details(int id)
-  {
-    Recipe targetRecipe = _db.Recipes
-                            .Include(recipe => recipe.Tags)
-                            .FirstOrDefault(recipe => recipe.RecipeId == id);
-    
-    return View(targetRecipe);
-  }
+    public ActionResult Details(int id)
+    {
+      Recipe targetRecipe = _db.Recipes
+                              .Include(recipe => recipe.Tags)
+                              .FirstOrDefault(recipe => recipe.RecipeId == id);
+      
+      return View(targetRecipe);
+    }
 
     // public ActionResult Details(int id)
     // {

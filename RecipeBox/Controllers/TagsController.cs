@@ -1,3 +1,4 @@
+using System.Reflection.PortableExecutable;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
@@ -7,25 +8,56 @@ using RecipeBox.Models;
 
 namespace RecipeBox.Controllers
 {
-    public class TagsController : Controllers
+    public class TagsController : Controller
     {
-        private readonly TagsController _dbs;
+      private readonly RecipeBoxContext _db;
 
-        public TagsController(RecipeBoxContext db)
+      public TagsController(RecipeBoxContext db)
+      {
+          _db = db;
+      }
+      
+      public ActionResult Index()
+      {
+          return View(_db.Tags.ToList());
+      }
+
+      public ActionResult Create()
+      {
+          return View();
+      }
+
+      [HttpPost]
+      public ActionResult Create(Tag tag)
+      {
+          _db.Tags.Add(tag);
+          _db.SaveChanges();
+          return RedirectToAction("Index");
+      }
+
+      public ActionResult Details(int id)
+      {
+        Tag thisTag = _db.Tags
+            .Include(fish => fish.JoinEntities)
+            .ThenInclude(fish => fish.Recipe)
+            .FirstOrDefault(tag => tag.TagId == id);
+            return View(thisTag);
+      }
+
+        public ActionResult Edit(int id)
         {
-            _dbs = db;
-        }
-        
-        public ActionResult Index()
-        {
-            return View (_dbs.Tags.ToList());
+            Tag thisTag = _db.Tags.FirstOrDefault(tag => tag.TagId == id);
+            ViewBag.RecipeId = new SelectList(_db.Recipes, "RecipeId", "RecipeName");
+            return View(thisTag);
+            
         }
 
-        public ActionResult Create()
-  
-  
-  
-  
-  
+        [HttpPost]
+      public ActionResult Edit (Tag tag)
+      {
+        _db.Tags.Update(tag);
+        _db.SaveChanges();
+        return RedirectToAction("Index");
+      }
     }
 }
