@@ -1,3 +1,30 @@
 @{
   Layout = "_Layout";
 }
+
+@using RecipeBox.Models
+@model RecipeBox.Models.Tag
+
+<h2>Tag Details</h2>
+<hr />
+
+<h3>@Html.DisplayFor(model => model.TagName):</h3>
+
+@if(@Model.JoinEntities.Count == 0)
+{
+  <p>This tag does not belong to any recipes!</p> 
+}
+else
+{
+  <h4>Recipes that include this tag:</h4>
+  <ul>
+  @foreach(RecipeTag join in Model.JoinEntities)
+  {
+    <li><strong>@Html.ActionLink($"{join.Recipe.RecipeName}", "Details", "Recipes", new { id = join.RecipeId})</strong></li>
+
+
+  }
+  </ul>
+}
+
+  

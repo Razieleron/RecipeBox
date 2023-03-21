@@ -22,6 +22,7 @@ a:hover{
   text-decoration: none; 
 }
 
+
 div#navLinks{
   text-align: center;
 
@@ -31,4 +32,23 @@ div#navLinks:hover{
 }
 span {
   color: crimson;
+}
+
+.jumbotron{
+  margin:15px 0px 0px 0px;
+  border-radius:10px;
+  background-image: url('../img/Splash.jpg');
+  background-position: 25% 30%;
+  background-size: cover;
+
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  box-shadow: inset 150px 0 2000px 0 #fff;
+  box-shadow: inset 150px 0 2000px 0 #fff;
+  height:440px;
+}
+
+.jumbotron #imgText {
+  text-align: left;
+  position: left;
 }
