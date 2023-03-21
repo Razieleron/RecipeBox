@@ -33,8 +33,7 @@ If you have not already, install the `dotnet-ef` tool by running the following c
 
 ```
 dotnet tool install --global dotnet-ef --version 6.0.0
-dotnet ef migrations add Initial
-dotnet ef database update
+
 ```
 
 ### Set Up and Run Project
