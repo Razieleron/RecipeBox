@@ -1,10 +1,38 @@
 @{
   Layout = "_Layout";
 }
+@using RecipeBox.Models;
 
 <div class="jumbotron jumbotron-fluid">
   <div class="container" id='imgText'>
-    <h1 class="display-2">Mjj Recipe Box</h1>
-    <p class="lead">The Fire So Hot!</p>
+    <h1 class="display-2">MJJ Recipe Box</h1>
   </div>
 </div>
+
+@if (User.Identity.IsAuthenticated)
+{
+  <h4>Recipes for @User.Identity.Name</h4>
+  @if (Model["recipes"].Length == 0)
+  {
+    <p>No recipes have been added yet!</p>
+  } 
+  <ul>
+    @foreach (Recipe recipe in Model["recipe"])
+    {
+      <li>@Html.ActionLink(@recipe.RecipeName, "Details", "recipes", new { id = @recipe.RecipeId})</li>
+    }
+  </ul>
+}
+
+
+  	<input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon"/>
+  	<label for="menu-icon"></label>
+  	<nav class="nav"> 		
+  		<ul class="pt-5">
+  			<li><a href="/Recipes">Recipes</a></li>
+  			<li><a href="/Tags/Index">Categories</a></li>
+  			<li><a href="/Ratings">Ratings</a></li>
+  			<li><a href="/Account">Login</a></li>
+  		</ul>
+  	</nav>
+
