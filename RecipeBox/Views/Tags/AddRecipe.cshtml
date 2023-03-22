@@ -1,0 +1,31 @@
+@{
+  Layout = "_Layout";
+}
+
+@using RecipeBox.Models
+@model RecipeBox.Models.Tag
+
+<h4>Assign a Tag to recipe: @Html.DisplayFor(model => model.TagName)</h4>
+
+<ul>
+  @foreach (RecipeTag join in Model.JoinEntities)
+  {
+      <li><strong>@join.Recipe.RecipeName</strong></li>
+    @using (Html.BeginForm("DeleteJoin", "Tags"))
+    {
+      @Html.Hidden("joinId", @join.RecipeTagId)
+      <input type="submit" value="Delete" />
+    }
+  }
+</ul>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.TagId)
+  @Html.Label("Select Recipe")
+  @Html.DropDownList("RecipeId")
+
+  <input type="submit" value="Save" />
+}
+<br>
+<p>@Html.ActionLink("Back to All Tags", "Index")</p>

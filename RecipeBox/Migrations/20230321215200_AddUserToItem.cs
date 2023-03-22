@@ -5,43 +5,44 @@
 namespace RecipeBox.Migrations
 {
     /// <inheritdoc />
-    public partial class AddingTagsToRecipeController : Migration
+    public partial class AddUserToItem : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<int>(
-                name: "TagsTagId",
+            migrationBuilder.AddColumn<string>(
+                name: "UserId",
                 table: "Recipes",
-                type: "int",
-                nullable: true);
+                type: "varchar(255)",
+                nullable: true)
+                .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Recipes_TagsTagId",
+                name: "IX_Recipes_UserId",
                 table: "Recipes",
-                column: "TagsTagId");
+                column: "UserId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Recipes_Tags_TagsTagId",
+                name: "FK_Recipes_AspNetUsers_UserId",
                 table: "Recipes",
-                column: "TagsTagId",
-                principalTable: "Tags",
-                principalColumn: "TagId");
+                column: "UserId",
+                principalTable: "AspNetUsers",
+                principalColumn: "Id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Recipes_Tags_TagsTagId",
+                name: "FK_Recipes_AspNetUsers_UserId",
                 table: "Recipes");
 
             migrationBuilder.DropIndex(
-                name: "IX_Recipes_TagsTagId",
+                name: "IX_Recipes_UserId",
                 table: "Recipes");
 
             migrationBuilder.DropColumn(
-                name: "TagsTagId",
+                name: "UserId",
                 table: "Recipes");
         }
     }

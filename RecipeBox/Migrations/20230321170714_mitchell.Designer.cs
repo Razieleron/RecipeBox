@@ -11,8 +11,8 @@ using RecipeBox.Models;
 namespace RecipeBox.Migrations
 {
     [DbContext(typeof(RecipeBoxContext))]
-    [Migration("20230320230925_AddRecipeTagToRecipeBoxContext")]
-    partial class AddRecipeTagToRecipeBoxContext
+    [Migration("20230321170714_mitchell")]
+    partial class mitchell
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

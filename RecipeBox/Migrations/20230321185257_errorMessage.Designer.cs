@@ -11,8 +11,8 @@ using RecipeBox.Models;
 namespace RecipeBox.Migrations
 {
     [DbContext(typeof(RecipeBoxContext))]
-    [Migration("20230320202701_AddingTagsToRecipeController")]
-    partial class AddingTagsToRecipeController
+    [Migration("20230321185257_errorMessage")]
+    partial class errorMessage
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,17 +70,18 @@ namespace RecipeBox.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("RecipeName")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("RecipeRating")
                         .HasColumnType("int");
 
-                    b.Property<int?>("TagsTagId")
+                    b.Property<int?>("TagId")
                         .HasColumnType("int");
 
                     b.HasKey("RecipeId");
 
-                    b.HasIndex("TagsTagId");
+                    b.HasIndex("TagId");
 
                     b.ToTable("Recipes");
                 });
@@ -103,7 +104,7 @@ namespace RecipeBox.Migrations
 
                     b.HasIndex("TagId");
 
-                    b.ToTable("RecipeTag");
+                    b.ToTable("RecipeTags");
                 });
 
             modelBuilder.Entity("RecipeBox.Models.Tag", b =>
@@ -144,11 +145,11 @@ namespace RecipeBox.Migrations
 
             modelBuilder.Entity("RecipeBox.Models.Recipe", b =>
                 {
-                    b.HasOne("RecipeBox.Models.Tag", "Tags")
+                    b.HasOne("RecipeBox.Models.Tag", "Tag")
                         .WithMany()
-                        .HasForeignKey("TagsTagId");
+                        .HasForeignKey("TagId");
 
-                    b.Navigation("Tags");
+                    b.Navigation("Tag");
                 });
 
             modelBuilder.Entity("RecipeBox.Models.RecipeTag", b =>

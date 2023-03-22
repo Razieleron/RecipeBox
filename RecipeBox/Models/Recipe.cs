@@ -1,15 +1,20 @@
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+namespace RecipeBox.Models;
 
-namespace RecipeBox.Models
-{
   public class Recipe
   {
     public int RecipeId { get; set; }
+    [Required(ErrorMessage = "The recipe's description can't be empty!")]
     public string RecipeName { get; set; }
+    [Required(ErrorMessage = "The recipe's Name can't be empty!")]
+    
     public int RecipeRating { get; set; }
-    public Tag Tags { get; set; }
+    public Tag Tag { get; set; }
     public List<RecipeTag> JoinEntities { get; set; }
     public List<Ingredient> Ingredients { get; set; }
+    public ApplicationUser User { get; set; 
 
     
     // public Dictionary<Ingredient, Ingredient.IngredientQty> IngredientTypeAndQty { get; set; } 
