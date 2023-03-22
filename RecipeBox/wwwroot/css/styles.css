@@ -256,17 +256,21 @@ h1{
   transition: all 250ms linear;
 }
 .nav ul li:nth-child(1){
-  transition-delay: 200ms;
+  transition-delay: 250ms;
 }
 .nav ul li:nth-child(2){
-  transition-delay: 150ms;
+  transition-delay: 200ms;
 }
 .nav ul li:nth-child(3){
-  transition-delay: 100ms;
+  transition-delay: 150ms;
 }
 .nav ul li:nth-child(4){
+  transition-delay: 100ms;
+}
+.nav ul li:nth-child(5){
   transition-delay: 50ms;
 }
+
 .nav ul li a{
   font-family: 'Montserrat', sans-serif;
   font-size: 9vh;
@@ -319,6 +323,9 @@ h1{
 }
 .menu-icon:checked ~ .nav ul li:nth-child(4){
   transition-delay: 1640ms;
+}
+.menu-icon:checked ~ .nav ul li:nth-child(5){
+  transition-delay: 1720ms;
 }
 
 
