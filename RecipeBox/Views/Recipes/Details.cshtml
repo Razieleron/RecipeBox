@@ -11,10 +11,10 @@
 
 @if(@Model.JoinEntities.Count == 0)
 {
-  <p>This recipe does not have any tags yet!</p>
+  <p>This recipe does not have any Categories yet!</p>
 }
 else
-{<p>This meal has the tags of:</p>
+{<p>This meal has the Categories of:</p>
   <ul>
     @foreach (RecipeTag fish in Model.JoinEntities)
     {
@@ -27,11 +27,6 @@ else
     }
   </ul>
 }
-
-
-
-@Html.ActionLink("Add a Tag", "AddTag", "Recipes", new {id = Model.RecipeId})
-
 <a href='@Url.Action("AddTag", new { id = Model.RecipeId })'>
-    <button type="button">Add a Tag</button>
+    <button type="button">Add/Remove a Category of a Recipe</button>
   </a>
