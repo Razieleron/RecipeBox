@@ -1,21 +1,42 @@
 @{
   Layout = "_Layout";
-}
+} 
 
+@using RecipeBox.Models
 @model RecipeBox.Models.Recipe
 
-<h2>Add a tag</h2>
+@if(Model.JoinEntities.Count ==0)
+{
+  <h4> @Html.DisplayFor(model => model.RecipeName) is not assigned to any Categories!</h4>
+  <p>Add one using the dropdown list below:</p>
+}
+<ul>
+  @if(@Model.JoinEntities.Count != 0)
+  {
+    <p>@Html.DisplayFor(model => Model.RecipeName) is assigned to the following Categories already:</p>
+  }
 
-<h4>Add a tag to this Recipe: @Html.DisplayFor(model => model.RecipeName)</h4>
+  @foreach (RecipeTag join in Model.JoinEntities)
+  {
+    <li><strong>@join.Tag.TagName</strong></li>
+    @using (Html.BeginForm("DeleteJoin", "Tags"))
+    {
+      @Html.Hidden("joinId", @join.RecipeTagId)
+      <input type="submit" value="Delete"/>
+    }
+  }
+</ul>
 
 @using (Html.BeginForm())
 {
-    @Html.HiddenFor(model => model.RecipeId)
+  @Html.HiddenFor(model => model.RecipeId)
+  @Html.Label("Select Tag")
+  @Html.DropDownList("TagId")
 
-    @Html.Label("Select tag")
-    @Html.DropDownList("TagId")
-
-    <input type="submit" value="Save" />
+  <input type="submit" value="Save" />
 }
+<br>
+<a href='@Url.Action("Index")'>
+    <button type="button">Back to List</button>
+</a>
 
-<p>@Html.ActionLink("Back to list", "Index")</p>
