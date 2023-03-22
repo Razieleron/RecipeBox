@@ -41,16 +41,15 @@ namespace RecipeBox.Controllers
 
     public ActionResult Create()
     {
-      ViewBag.PageTitle = "Add Recipe";
       return View();
     }
 
       [HttpPost]
-    public async Task<ActionResult> Create(Recipe recipe, int tagId)
+    public async Task<ActionResult> Create(Recipe recipe)
     {
       if (!ModelState.IsValid)
       {
-        ViewBag.CategoryId = new SelectList(_db.Tags, "TagId", "TagName");
+        ViewBag.RecipeId = new SelectList(_db.Tags, "TagId", "TagName");
         return View(recipe);
       }
       else
@@ -145,12 +144,3 @@ namespace RecipeBox.Controllers
 
     }
   }
-
-
-
-
-
-
-
-
-   
