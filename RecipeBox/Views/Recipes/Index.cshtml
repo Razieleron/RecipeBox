@@ -15,7 +15,7 @@ else
   <ul>
     @foreach (Recipe item in Model)
     {
-      <li>@Html.ActionLink($"{item.RecipeName}", "Details", new { id = item.RecipeId }) | @item.Tag.TagName</li>
+      <li>@Html.ActionLink($"{item.RecipeName}", "Details", new { id = item.RecipeId }) </li>
     }
   </ul>
 }
