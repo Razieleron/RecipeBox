@@ -5,9 +5,12 @@ using System.Linq;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace RecipeBox.Controllers
 {
+  // [Authorize]
     public class HomeController : Controller
     {
       private readonly RecipeBoxContext _db;
@@ -22,7 +25,10 @@ namespace RecipeBox.Controllers
       [HttpGet("/")]
       public async Task<ActionResult> Index()
       {
-    
+        // are we missing something here?  the lesson has:
+        /*
+        Category[] cats = _db.Categories.ToArray();
+        */
       Dictionary<string, object[]> model = new Dictionary<string, object[]>();
       
       //Recipe logic
