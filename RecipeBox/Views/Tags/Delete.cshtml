@@ -1,0 +1,15 @@
+@{
+    Layout = "_Layout";
+}
+
+@model RecipeBox.Models.Tag
+
+<h4>Delete Tag?</h4>
+
+@Html.DisplayFor(model => model.TagName)
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Delete"/>
+}
+
+@Html.ActionLink("Back to all Tags", "Index")
