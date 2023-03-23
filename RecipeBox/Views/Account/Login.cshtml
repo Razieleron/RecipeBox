@@ -22,8 +22,16 @@
   @Html.LabelFor(m => m.Password)
   @Html.EditorFor(m => m.Password)
 
-  <input type="submit" value="Log in" />
+  <input type="submit" class="button" value="Log in" />
 }
 
-<p>@Html.ActionLink("Register for an account", "Register")</p>
+</p>
 <p>@Html.ActionLink("Back to accounts page", "Index")</p>
+
+<a href='@Url.Action("Register")'>
+    <button type="button" class="button">Sign up</button>
+</a>
+<a href='@Url.Action("Index")'>
+    <button type="button" class="button">Back</button>
+</a>
+
