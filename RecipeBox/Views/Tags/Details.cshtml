@@ -5,7 +5,7 @@
 @using RecipeBox.Models
 @model RecipeBox.Models.Tag
 
-<h2>Tag Details</h2>
+<h1>Tag Details</h1>
 <hr />
 
 <h3>@Html.DisplayFor(model => model.TagName):</h3>
@@ -21,10 +21,13 @@ else
   @foreach(RecipeTag join in Model.JoinEntities)
   {
     <li><strong>@Html.ActionLink($"{join.Recipe.RecipeName}", "Details", "Recipes", new { id = join.RecipeId})</strong></li>
-
-
   }
+@* @Html.Hidden("joinId", @join.RecipeId)
+<input type="submit" value="Delete" /> *@
   </ul>
 }
 
-  
+
+<a href='@Url.Action("Delete")'>
+  <button type="button" class="button">Delete</button>
+</a>
