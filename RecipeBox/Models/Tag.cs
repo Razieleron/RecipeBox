@@ -12,6 +12,7 @@ namespace RecipeBox.Models
     [Required(ErrorMessage = "The recipe's description can't be empty!")]
 
     public List<RecipeTag> JoinEntities { get; set; }
+    public ApplicationUser User { get; set; } 
 
   }
 }
