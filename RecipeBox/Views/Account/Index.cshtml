@@ -2,7 +2,7 @@
   Layout = "_Layout";
 }
 
-<h2>Authentication with Identity</h2>
+
 <hr />
 @if (User.Identity.IsAuthenticated)
 {
@@ -14,7 +14,11 @@
 }
 else
 {
-  <p>@Html.ActionLink("Register", "Register")</p>
-  <p>@Html.ActionLink("Log in", "Login")</p>
+  <a href='@Url.Action("Register")'>
+    <button type="button" class="button">Create Account</button>
+  </a>
+  
+  <a href='@Url.Action("Login")'>
+    <button type="button" class="button">Log in</button>
+  </a>
 }
-<p>@Html.ActionLink("Home", "Index", "Home")</p>
