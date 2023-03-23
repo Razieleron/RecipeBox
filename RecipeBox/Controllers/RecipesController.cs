@@ -27,7 +27,11 @@ namespace RecipeBox.Controllers
       _db = db;
     }
 
-    public async Task<ActionResult> Index()
+    public ActionResult Index()
+    {
+      return View(_db.Recipes.ToList());
+    }
+    public async Task<ActionResult> MyRecipe()
     {
       string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
@@ -49,6 +53,7 @@ namespace RecipeBox.Controllers
     {
       if (!ModelState.IsValid)
       {
+        
         ViewBag.RecipeId = new SelectList(_db.Tags, "TagId", "TagName");
         return View(recipe);
       }
