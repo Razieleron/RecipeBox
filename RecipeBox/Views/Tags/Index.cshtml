@@ -17,4 +17,9 @@
     <li>@Html.ActionLink($"{item.TagName}", "Details", new {id = item.TagId})</li>
 }
 <br><br>
-@Html.ActionLink("Add A Category", "Create")
+
+
+<a href='@Url.Action("Create")'>
+    <button type="button" class="button">Add a Category</button>
+</a>
+
