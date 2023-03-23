@@ -6,14 +6,14 @@
 
 @model LoginViewModel
 
-<h2>Log in with your account</h2>
+<h1>Log in with your account</h1>
 <hr/>
 
 @if(!ViewData.ModelState.IsValid) 
 {
   @Html.ValidationSummary("Please fix the following error(s) and then resubmit the form:") 
 }
-
+<div class="userInfo">
 @using (Html.BeginForm())
 {
   @Html.LabelFor(m => m.Email)
@@ -24,7 +24,7 @@
 
   <input type="submit" class="button" value="Log in">
 }
-
+</div>
 
 
 </p>
