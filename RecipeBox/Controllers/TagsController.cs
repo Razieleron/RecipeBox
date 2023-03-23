@@ -38,24 +38,14 @@ namespace RecipeBox.Controllers
     }
 
     [HttpPost]
-    public async Task<ActionResult> Create(Tag tag, int RecipeId)
-    {
-      if (!ModelState.IsValid)
+  public ActionResult  Create(Tag tag)
       {
-        
-        ViewBag.TagId = new SelectList(_db.Recipes, "RecipeId", "RecipeName");
-        return View(tag);
-      }
-      else
-      {
-        string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
-        tag.User = currentUser;
+    
         _db.Tags.Add(tag);
         _db.SaveChanges();
         return RedirectToAction("Index");
       }
-    }
+    
 
     public ActionResult Details(int id)
     {
@@ -99,7 +89,8 @@ namespace RecipeBox.Controllers
 
     public ActionResult AddRecipe(int id)
     {
-      Tag thisTag = _db.Tags.FirstOrDefault(tags => tags.TagId == id);
+      Tag thisTag = _db.Tags
+                          .FirstOrDefault(tags => tags.TagId == id);
       ViewBag.RecipeId = new SelectList(_db.Recipes, "RecipeId", "RecipeName");
       return View(thisTag);
     }
