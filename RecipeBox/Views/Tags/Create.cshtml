@@ -7,14 +7,14 @@
 <p>@Html.ValidationMessageFor(model => model.TagId, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
 <p>@Html.ValidationMessageFor(model => model.TagName, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
 
-<h2> Add a new Category </h2>
+<h1> Add a new Category </h1>
 
 @using(Html.BeginForm())
 {
     @Html.LabelFor(model => model.TagName)
     @Html.TextBoxFor(model => model.TagName)
-
-<input type="submit" value="Add new Category" class="btn btn-default" />
+<br>
+<input type="submit" value="Add new Category" class="button" />
 
 
 }
