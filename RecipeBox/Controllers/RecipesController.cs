@@ -62,6 +62,7 @@ namespace RecipeBox.Controllers
         string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
         recipe.User = currentUser;
+        
         _db.Recipes.Add(recipe);
         _db.SaveChanges();
         return RedirectToAction("Index");
