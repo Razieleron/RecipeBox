@@ -7,12 +7,16 @@
 <p>@Html.ValidationMessageFor(model => model.RecipeId, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
 <p>@Html.ValidationMessageFor(model => model.RecipeName, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
 
-<h2> Add a new Recipe </h2>
+<h1> Add a new Recipe </h1>
 
 @using (Html.BeginForm())
 {
   @Html.LabelFor(model => model.RecipeName)
   @Html.TextBoxFor(model => model.RecipeName)
+  @Html.LabelFor(model => model.RecipeIngredients)
+  @Html.TextBoxFor(model => model.RecipeIngredients)
+  @Html.LabelFor(model => model.RecipeInstructions)
+  @Html.TextBoxFor(model => model.RecipeInstructions)
   <br>
-  <input type="submit" value="Add Recipe">
+  <input type="submit" class="button" value="Add Recipe">
 }
