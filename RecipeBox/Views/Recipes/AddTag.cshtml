@@ -8,12 +8,13 @@
 @if(Model.JoinEntities.Count ==0)
 {
   <h4> @Html.DisplayFor(model => model.RecipeName) is not assigned to any Categories!</h4>
-  <p>Add one using the dropdown list below:</p>
+  <h3>Add one using the dropdown list below:</h3>
 }
 <ul>
   @if(@Model.JoinEntities.Count != 0)
   {
-    <p>@Html.DisplayFor(model => Model.RecipeName) is assigned to the following Categories already:</p>
+    <h1>@Html.DisplayFor(model => Model.RecipeName)</h1>
+      <h2>Categories:</h2>
   }
 
   @foreach (RecipeTag join in Model.JoinEntities)
@@ -22,7 +23,7 @@
     @using (Html.BeginForm("DeleteJoin", "Tags"))
     {
       @Html.Hidden("joinId", @join.RecipeTagId)
-      <input type="submit" value="Delete"/>
+      <input type="submit"  value="Delete"/>
     }
   }
 </ul>
@@ -33,10 +34,10 @@
   @Html.Label("Select Tag")
   @Html.DropDownList("TagId")
 
-  <input type="submit" value="Save" />
+  <input type="submit" class="button"value="Add" />
 }
 <br>
 <a href='@Url.Action("Index")'>
-    <button type="button">Back to List</button>
+    <button type="button" class="button">Back to List</button>
 </a>
 

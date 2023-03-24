@@ -4,12 +4,12 @@
 
 @model RecipeBox.Models.Recipe
 
-<h4>Delete this Recipe?</h4>
+<h1>Delete this Recipe?</h1>
 
-@Html.DisplayFor(model => model.RecipeName)
+<h2>@Html.DisplayFor(model => model.RecipeName)</h2>
 @using (Html.BeginForm())
 {
-    <input type="submit" value="Delete"/>
+    <input type="submit" class="button" value="Delete"/>
 }
 <br>
 @Html.ActionLink("Back to Recipe", "Index")

@@ -1,19 +1,29 @@
+using System.Net.Mail;
 using System.Reflection.PortableExecutable;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
+
+
 using RecipeBox.Models;
 
 namespace RecipeBox.Controllers
 {
+  [Authorize]
   public class TagsController : Controller
   {
     private readonly RecipeBoxContext _db;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public TagsController(RecipeBoxContext db)
+    public TagsController(UserManager<ApplicationUser> userManager, RecipeBoxContext db)
     {
+      _userManager = userManager;
       _db = db;
     }
 
@@ -24,21 +34,18 @@ namespace RecipeBox.Controllers
 
     public ActionResult Create()
     {
-      ViewBag.PageTitle = "Add Tag";
       return View();
     }
 
     [HttpPost]
-    public ActionResult Create(Tag tag)
-    {
-      if (!ModelState.IsValid)
+  public ActionResult  Create(Tag tag)
       {
-        return View(tag);
+    
+        _db.Tags.Add(tag);
+        _db.SaveChanges();
+        return RedirectToAction("Index");
       }
-      _db.Tags.Add(tag);
-      _db.SaveChanges();
-      return RedirectToAction("Index");
-    }
+    
 
     public ActionResult Details(int id)
     {
@@ -82,12 +89,13 @@ namespace RecipeBox.Controllers
 
     public ActionResult AddRecipe(int id)
     {
-      Tag thisTag = _db.Tags.FirstOrDefault(tags => tags.TagId == id);
+      Tag thisTag = _db.Tags
+                          .FirstOrDefault(tags => tags.TagId == id);
       ViewBag.RecipeId = new SelectList(_db.Recipes, "RecipeId", "RecipeName");
       return View(thisTag);
     }
 
-       [HttpPost]
+    [HttpPost]
     public ActionResult AddRecipe(Tag tag, int recipeId)
     {
       #nullable enable

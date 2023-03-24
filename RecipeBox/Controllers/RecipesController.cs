@@ -27,7 +27,11 @@ namespace RecipeBox.Controllers
       _db = db;
     }
 
-    public async Task<ActionResult> Index()
+    public ActionResult Index()
+    {
+      return View(_db.Recipes.ToList());
+    }
+    public async Task<ActionResult> MyRecipe()
     {
       string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
@@ -41,16 +45,16 @@ namespace RecipeBox.Controllers
 
     public ActionResult Create()
     {
-      ViewBag.PageTitle = "Add Recipe";
       return View();
     }
 
       [HttpPost]
-    public async Task<ActionResult> Create(Recipe recipe, int tagId)
+    public async Task<ActionResult> Create(Recipe recipe)
     {
       if (!ModelState.IsValid)
       {
-        ViewBag.CategoryId = new SelectList(_db.Tags, "TagId", "TagName");
+        
+        ViewBag.RecipeId = new SelectList(_db.Tags, "TagId", "TagName");
         return View(recipe);
       }
       else
@@ -58,6 +62,7 @@ namespace RecipeBox.Controllers
         string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
         recipe.User = currentUser;
+        
         _db.Recipes.Add(recipe);
         _db.SaveChanges();
         return RedirectToAction("Index");
@@ -145,12 +150,3 @@ namespace RecipeBox.Controllers
 
     }
   }
-
-
-
-
-
-
-
-
-   

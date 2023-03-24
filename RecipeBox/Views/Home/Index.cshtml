@@ -9,22 +9,7 @@
   </div>
 </div>
 
-@if (User.Identity.IsAuthenticated)
-{
-  <h4>Recipes for @User.Identity.Name</h4>
-  @if (Model["recipes"].Length == 0)
-  {
-    <p>No recipes have been pulled yet added yet!</p>
-  } 
-  <ul>
-    @foreach (Recipe recipe in Model["recipe"])
-    {
-      <li>@Html.ActionLink(@recipe.RecipeName, "Details", "recipes", new { id = @recipe.RecipeId})</li>
-    }
-  </ul>
-}
-
-
+@* 
   	<input class="menu-icon" type="checkbox" id="menu-icon" name="menu-icon"/>
   	<label for="menu-icon"></label>
   	<nav class="nav"> 		
@@ -33,6 +18,7 @@
   			<li><a href="/Tags/Index">Categories</a></li>
   			<li><a href="/Ratings">Ratings</a></li>
   			<li><a href="/Account">Login</a></li>
+        <li><a href="/">Home</a></li> *@
   		</ul>
   	</nav>
 
