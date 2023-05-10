@@ -2,7 +2,7 @@
 
 #### By: Mitchell Gantz, Jannon Sielaff and John Lenz
 
-An application to track machines and their engineers for a fictional factory.
+An application to track recipes and their components for a fictional hobby website.
 
 ## Technologies Used
 
